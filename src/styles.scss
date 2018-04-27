@@ -1,1 +1,51 @@
 /* You can add global styles to this file, and also import other style files */
+//@import "~bootswatch/dist/yeti/_variables.scss";
+@import "~bootstrap/scss/bootstrap.scss";
+//@import "~bootswatch/dist/yeti/_bootswatch.scss";
+
+body{
+  //  background-color: #AAAAAA;
+}
+
+// resolution: 1650 x 1050
+.footerClass{
+  background-color: #BBBBBB;
+  position: fixed;
+  vertical-align: middle;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.alignLeft{
+  text-align: left;
+}
+
+.colorWhite{
+  color: white;
+  padding-right: 5px;
+}
+
+.verticalAlignCenter{
+  vertical-align: center;
+  display: flex;
+  justify-content: center;
+}
+
+.floatLeft{
+  float: left;
+}
+
+.centerDiv{
+  margin: auto;
+  height: 80%;
+}
+
+.mainBox{
+  height: 750px;
+  background-color:#EAEDED;
+}
+
+.marginTop{
+  padding-top: 15px;
+}
