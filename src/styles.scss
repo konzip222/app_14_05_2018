@@ -5,6 +5,7 @@
 
 body{
   //  background-color: #AAAAAA;
+ // background-color: #f8f9ec;
 }
 
 // resolution: 1650 x 1050
@@ -41,11 +42,21 @@ body{
   height: 80%;
 }
 
+.centerDiv{
+  margin: auto;
+  height: 80%;
+}
+//old color: EAEDED
 .mainBox{
   height: 750px;
-  background-color:#EAEDED;
+  background-color:#f2f3e9;
+  padding: 20px;
 }
 
 .marginTop{
-  padding-top: 15px;
+  padding-top: 150px;
+}
+
+.padding{
+  padding: 50px;
 }

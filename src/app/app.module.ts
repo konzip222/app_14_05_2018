@@ -1,19 +1,27 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AgmCoreModule } from '@agm/core';
+import { AngularFireModule} from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { DatabaseService } from './services/database.service';
+
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
-import { ContactComponent } from './contact/contact.component';
-import { GalleryComponent } from './gallery/gallery.component';
+import { HomeComponent } from './components/home/home.component';
+import { ContactComponent } from './components/contact/contact.component';
+import { GalleryComponent } from './components/gallery/gallery.component';
 
 import 'hammerjs'; // <------ mandatory dependency for angular-modal-gallery
 import 'mousetrap'; // <------ mandatory dependency for angular-modal-gallery
 
 import { ModalGalleryModule } from 'angular-modal-gallery';
-import { FormValidationComponent } from './form-validation/form-validation.component';
+import { FormValidationComponent } from './components/form-validation/form-validation.component';
+import { environment } from '../environments/environment';
+import { ClockComponent } from './components/clock/clock.component';
+import { TestComponentComponent } from './components/test-component/test-component.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +29,16 @@ import { FormValidationComponent } from './form-validation/form-validation.compo
     HomeComponent,
     ContactComponent,
     GalleryComponent,
-    FormValidationComponent
+    FormValidationComponent,
+    ClockComponent,
+    TestComponentComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    AngularFireAuthModule,    
     RouterModule.forRoot([
       {
         path: '',
@@ -54,7 +67,7 @@ import { FormValidationComponent } from './form-validation/form-validation.compo
       apiKey: 'AIzaSyAuJgMRc84UWwMRlXpmR4ms9CECA3nG6Co'
     })
   ],
-  providers: [],
+  providers: [DatabaseService, Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

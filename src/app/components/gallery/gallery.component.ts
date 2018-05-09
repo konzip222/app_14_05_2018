@@ -18,24 +18,9 @@ export class GalleryComponent implements OnInit {
   ngOnInit() {
   }
 
-  customPlainGalleryRowConfig: PlainGalleryConfig = {
-    strategy: PlainGalleryStrategy.CUSTOM,
-    layout: new AdvancedLayout(-1, true)
-  };
-
-  customPlainGalleryColumnConfig: PlainGalleryConfig = {
-    strategy: PlainGalleryStrategy.CUSTOM,
-    layout: new AdvancedLayout(-1, true)
-  };
-
-  customPlainGalleryRowDescConfig: PlainGalleryConfig = {
-    strategy: PlainGalleryStrategy.CUSTOM,
-    layout: new AdvancedLayout(-1, true)
-  };
-
   plainGalleryRow: PlainGalleryConfig = {
     strategy: PlainGalleryStrategy.ROW,
-    layout: new LineLayout({ width: '80px', height: '80px' }, { length: 5, wrap: true }, 'flex-start')
+    layout: new LineLayout({ width: '80px', height: '80px', }, { length: 5, wrap: true }, 'flex-start')
   };
 
   images: Image[] = [

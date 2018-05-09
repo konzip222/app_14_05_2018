@@ -1,9 +1,9 @@
 <div class="jumbotron text-center mainBox">
-    <p>{{companyName}}</p>
-    <p>{{companyCity}}</p>
-    <p>{{companyCityCode}}</p>    
-    <p>{{companyPhoneNumber}}</p>
-    <p>{{companyEmailAdress}}</p>
+    <p>Name: {{companyList[(companyList.length-1)].name}}</p>
+    <p>Adress: {{companyList[(companyList.length-1)].city}} {{companyList[(companyList.length-1)].cityCode}}</p>
+    <p>Phone: {{companyList[(companyList.length-1)].phoneNumber}}</p>    
+    <p>Email: {{companyList[(companyList.length-1)].emailAdress}}</p>
+
     <agm-map [latitude]="lat" [longitude]="lng">
         <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
     </agm-map>
@@ -33,7 +33,7 @@
                         <div class="form-group">
                             <label class="form-control-label"  for="field_companyNameInput">Company Name</label>
                             <input type="text" class="form-control" name="companyNameInput" id="field_companyNameInput"
-                                    [(ngModel)] = "companyNameInput" #companyNameField="ngModel" required pattern="[A-Z,a-z]+" (focus)="Typing(0,true)" (blur)="Typing(0,false)" />
+                                    [(ngModel)] = "company.name" #companyNameField="ngModel" required pattern="[A-Z,a-z]+" (focus)="Typing(0,true)" (blur)="Typing(0,false)" />
                             <div [hidden]="companyNameField.valid || isTyping[0]" class="alert alert-danger" >
                                 <span>Company name is invalid!</span>
                             </div>
@@ -41,7 +41,7 @@
                         <div class="form-group">
                             <label class="form-control-label"  for="field_companyCityInput">Company City</label>
                             <input type="text" class="form-control" name="companyCityInput" id="field_companyCityInput"
-                                    [(ngModel)] = "companyCityInput" #companyCityField="ngModel" required pattern="[A-Z,a-z]+" (focus)="Typing(1,true)" (blur)="Typing(1,false)" />
+                                    [(ngModel)] = "company.city" #companyCityField="ngModel" required pattern="[A-Z,a-z]+" (focus)="Typing(1,true)" (blur)="Typing(1,false)" />
                             <div [hidden]="companyCityField.valid || isTyping[1]" class="alert alert-danger" >
                                 <span>Company city is invalid!</span>
                             </div>
@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <label class="form-control-label"  for="field_companyCityCodeInput">Company City Code</label>
                             <input type="text" class="form-control" name="companyCityCodeInput" id="field_companyCityCodeInput"
-                                    [(ngModel)] = "companyCityCodeInput" #companyCityCodeField="ngModel" required pattern="[0-9]{2}-[0-9]{3}" (focus)="Typing(2,true)" (blur)="Typing(2,false)" />
+                                    [(ngModel)] = "company.cityCode" #companyCityCodeField="ngModel" required pattern="[0-9]{2}-[0-9]{3}" (focus)="Typing(2,true)" (blur)="Typing(2,false)" />
                             <div [hidden]="companyCityCodeField.valid || isTyping[2]" class="alert alert-danger" >
                                 <span>City code is invalid!</span>
                             </div>
@@ -57,7 +57,7 @@
                         <div class="form-group">
                             <label class="form-control-label"  for="field_companyPhoneNumberInput">Phone Number</label>
                             <input type="number" class="form-control" name="companyPhoneNumberInput" id="field_companyPhoneNumberInput"
-                                    [(ngModel)] = "companyPhoneNumberInput" #companyPhoneNumberField="ngModel" required pattern="([0-9]{9})" (focus)="Typing(3,true)" (blur)="Typing(3,false)" />
+                                    [(ngModel)] = "company.phoneNumber" #companyPhoneNumberField="ngModel" required pattern="([0-9]{9})" (focus)="Typing(3,true)" (blur)="Typing(3,false)" />
                             <div [hidden]="companyPhoneNumberField.valid || isTyping[3]" class="alert alert-danger" >
                                 <span>Company phone number is invalid!</span>
                             </div>
@@ -65,7 +65,7 @@
                         <div class="form-group">
                             <label class="form-control-label"  for="field_companyEmailAdressInput">Email Adress</label>
                             <input type="text" class="form-control" name="emailAdressInput" id="field_companyEmailAdressInput"
-                                    [(ngModel)] = "companyEmailAdressInput" #companyEmailAdressField="ngModel" required pattern="(^[a-z, A-Z, 0-9]+@[a-z, A-Z, 0-9]+\.[a-z,A-Z,0-9]{1,})" (focus)="Typing(4,true)" (blur)="Typing(4,false)" />
+                                    [(ngModel)] = "company.emailAdress" #companyEmailAdressField="ngModel" required pattern="(^[a-z, A-Z, 0-9]+@[a-z, A-Z, 0-9]+\.[a-z,A-Z,0-9]{1,})" (focus)="Typing(4,true)" (blur)="Typing(4,false)" />
                             <div [hidden]="companyEmailAdressField.valid || isTyping[4]" class="alert alert-danger" >
                                 <span>Email adress is invalid!</span>
                             </div>
@@ -73,7 +73,7 @@
                         <div class="form-group">
                             <label class="form-control-label"  for="field_companyLatitudeInput">Latitude</label>
                             <input type="number" class="form-control" name="companyLatitudeInput" id="field_companyLatitudeInput"
-                                    [(ngModel)] = "companyLatitudeInput" #companyLatitudeField="ngModel"  pattern="[0-9]{1,}" (focus)="Typing(5,true)" (blur)="Typing(5,false)" />
+                                    [(ngModel)] = "company.latitude" #companyLatitudeField="ngModel"  pattern="[0-9]{1,}" (focus)="Typing(5,true)" (blur)="Typing(5,false)" />
                             <div [hidden]="companyLatitudeField.valid || isTyping[5]" class="alert alert-danger" >
                                 <span>Latitude is invalid!</span>
                             </div>
@@ -81,7 +81,7 @@
                         <div class="form-group">
                             <label class="form-control-label"  for="field_companyLongitudeInput">Longitude</label>
                             <input type="number" class="form-control" name="companyLongitudeInput" id="field_companyLongitudeInput"
-                                    [(ngModel)] = "companyLongitudeInput" #companyLongitudeField="ngModel"  pattern="[0-9]{1,}" (focus)="Typing(6,true)" (blur)="Typing(6,false)" />
+                                    [(ngModel)] = "company.longitude" #companyLongitudeField="ngModel"  pattern="[0-9]{1,}" (focus)="Typing(6,true)" (blur)="Typing(6,false)" />
                             <div [hidden]="companyLongitudeField.valid || isTyping[6]" class="alert alert-danger" >
                                 <span>Longitude is invalid!</span>
                             </div>
@@ -93,7 +93,7 @@
         
         <!-- Modal footer -->
         <div class="modal-footer">
-          <button type="submit" [disabled]="form.form.invalid" class="btn btn-primary" (click)="updateCompanyData(companyNameInput,companyCityInput,companyCityCodeInput,companyPhoneNumberInput,companyEmailAdressInput,companyLatitudeInput,companyLongitudeInput)" data-dismiss="modal">
+          <button type="submit" [disabled]="form.form.invalid" class="btn btn-primary" (click)="onSubmit(company)" data-dismiss="modal">
             <span class="fa fa-save"></span>&nbsp;<span >Save</span>
           </button>            
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
