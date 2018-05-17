@@ -1,0 +1,9 @@
+<div class="marginLeft">
+  basket works!
+  <p *ngIf="basketContent.length==0">basket is empty</p>
+  <div *ngFor="let product of basketContent">
+    <div class="noneMargin"><span>Product name: {{product.name}}</span><span> prize: {{product.prize}}zł</span><span> amount: {{product.amount}}</span></div>
+  </div>
+  <button (click)="addItem()">Add</button>
+  <button (click)="removeItem(2)">Remove</button>  
+</div>

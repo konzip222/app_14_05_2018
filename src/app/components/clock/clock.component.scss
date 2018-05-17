@@ -7,7 +7,7 @@
 }
 
 .testWidth{
-    width:40%;
+    width:30%;
     height: 60px;
  //   vertical-align: middle;
 }
@@ -15,6 +15,10 @@
 .floatLeft{
   float: left;
   height: 60px;
+}
+
+.marginLeft{
+    margin-left: 40px;
 }
 
 .clearBoth{
@@ -76,7 +80,6 @@ div.int-box { display: table-cell; vertical-align: middle; text-align: center;}
         display: none;
     }
 }
-
 @media screen and (min-width: 769px) and (max-width: 1024px) {
     #longIssue{
         display: none;
@@ -93,6 +96,7 @@ div.int-box { display: table-cell; vertical-align: middle; text-align: center;}
     #issueBox{
         display: none;
     }
+   
     #iconBox{
         position: relative;
         left: 35vw;
@@ -111,7 +115,24 @@ div.int-box { display: table-cell; vertical-align: middle; text-align: center;}
         width: 50vw;
         z-index: 98;        
         //display: none;
-    }       
+    }      
+    /*
+    #contBox{
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;         
+    }
+    #iconBox{
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end; 
+    }
+    #timeBox{
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end; 
+        //display: none;
+    } */  
 }
 
 // Tooltip
@@ -140,4 +161,27 @@ div.int-box { display: table-cell; vertical-align: middle; text-align: center;}
     left: 0;
     top: 0;    
   //  visibility: hidden;
+}
+
+
+// classes to center stuff
+.parent {
+  display: flex;
+  height: 300px; /* Or whatever */
+  background-color: green;
+}
+
+.child {
+  width: 100px;  /* Or whatever */
+  height: 100px; /* Or whatever */
+  //margin: auto;  /* Magic! */
+  background-color: red;
+}
+
+.parentTest{
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    height: 300px; /* Or whatever */
+    background-color: green;    
 }

@@ -53,15 +53,21 @@ export class ClockComponent implements OnInit {
   timeResult: string;  
   tooltipHidden = true;
 
-  ngOnInit() {
+  testArray = [1,2,3,4,5,6,7,8,9,10];
+  resultSum = 0;
+  resultSum2 = 0;
 
+  ngOnInit() {
+    this.addTooltipFuntions();
+    this.changeArrayValue();
     this.checkInputs(this.dataInput.StartTime,this.dataInput.Issue.IssueName);    
     setInterval(() => {
       this.updateTime(this.dataInput.StartTime);
-    }, 1000);
-    setInterval(() => {
-      this.addTooltipFuntions();
-    }, 5000);      
+    }, 1000);  
+  }
+
+  onResize(event) {
+    this.addTooltipFuntions();
   }
 
   updateTime(initialDate){
@@ -133,32 +139,62 @@ export class ClockComponent implements OnInit {
       }
   }
 
-  showTooltip(event: MouseEvent, thiss){
-    if(thiss.tooltipHidden){
-      let tooltip = thiss._document.getElementById('tooltip');
-      tooltip.style.left = event.clientX + thiss._document.documentElement.scrollLeft + 15 + "px";
-      tooltip.style.top = event.clientY + thiss._document.documentElement.scrollTop - 15 + "px";
+  showTooltip(event: MouseEvent){
+    if(this.tooltipHidden){
+      let tooltip = this._document.getElementById('tooltip');
+      tooltip.style.left = event.clientX + this._document.documentElement.scrollLeft + 15 + "px";
+      tooltip.style.top = event.clientY + this._document.documentElement.scrollTop - 15 + "px";
       tooltip.style.display = "block";
       tooltip.style.visibility = "visible";           
-      thiss.tooltipHidden = false;      
+      this.tooltipHidden = false;      
     }     
   }
 
-  hideTooltip(thiss){
-    thiss._document.getElementById('tooltip').style.visibility = "hidden";
-    thiss.tooltipHidden = true;     
+  hideTooltip(){
+    this._document.getElementById('tooltip').style.visibility = "hidden";
+    this.tooltipHidden = true;     
   }
 
   addTooltipFuntions(){
-    var thiss = this;
     let contBox = this._document.getElementById('contBox');
     let lastDisplayedChild = this._document.getElementById(this.getLastDisplayedChildId(contBox));
-    lastDisplayedChild.addEventListener("mouseleave",function(){
-      thiss.hideTooltip(thiss);
+        lastDisplayedChild.addEventListener("mouseleave", () => {
+        this.hideTooltip();
     });
+    lastDisplayedChild.addEventListener("mouseover",(event: MouseEvent) =>{
+      this.showTooltip(event);
+    });
+
+    let x = [1,2,3];
+    
+    for(let i =0; i < x.length; i++){
+        x[i] = x[i] * x[i];
+    }
+
+    let goodFn =  element => {let v = element * element; return v *2;}
+    x.forEach((kuubar, index) => console.log(kuubar));
+    let y = x.map( goodFn );
+    let sum = x.reduce((prev, curr, currIndex) => currIndex < 2 ? prev + curr : prev, -1);
+    x.filter(foo => foo > 2);
+  
+    /*
+    lastDisplayedChild.addEventListener("mouseleave", function(){
+        this.hideTooltip();
+    }.bind(this));
+    */
+    /*
     lastDisplayedChild.addEventListener("mouseover",function(event: MouseEvent){
-      thiss.showTooltip(event,thiss);
-    });
+      this.showTooltip(event); {let result = element * element; return result}
+    }.bind(this));   */ 
+  }
+
+  changeArrayValue(){
+    let squareEvenNumbers = element => !(element%2) ? element * element : element;
+    let getTwoDigitNumbers = element => element > 9;
+    let sumAllNumbers = element =>{this.resultSum2 += element};
+    this.testArray = this.testArray.map(squareEvenNumbers).filter(getTwoDigitNumbers);
+    this.resultSum = this.testArray.reduce((prev, curr, currIndex) => prev + curr, 0);
+    this.testArray.forEach(sumAllNumbers);
   }
 
   getLastDisplayedChildId(parent){
@@ -169,5 +205,4 @@ export class ClockComponent implements OnInit {
       }
     }
   }
-
 }

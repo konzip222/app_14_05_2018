@@ -1,0 +1,22 @@
+<div class="marginLeft">
+  shop works!
+  <table class="table table-striped table-hover">
+    <tr>
+      <th>Name</th>
+      <th>Cateogry</th>
+      <th>Prize</th>
+      <th>Amount</th>
+      <th></th>            
+    </tr>
+    <tr *ngFor="let product of products;index as i">
+      <td>{{product.name}}</td>
+      <td>{{product.category}}</td>
+      <td>{{product.prize}}zł</td>
+      <td><input type="number" [(ngModel)] = "product.amount"/></td>
+      <td>
+          <button (click)="addItem(i)">Add</button>
+          <button (click)="removeItem(i)">Remove</button>
+      </td>            
+    </tr>
+  </table>      
+</div>
