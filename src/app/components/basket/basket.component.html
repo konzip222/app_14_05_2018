@@ -1,9 +1,38 @@
 <div class="marginLeft">
-  basket works!
-  <p *ngIf="basketContent.length==0">basket is empty</p>
-  <div *ngFor="let product of basketContent">
-    <div class="noneMargin"><span>Product name: {{product.name}}</span><span> prize: {{product.prize}}zł</span><span> amount: {{product.amount}}</span></div>
-  </div>
-  <button (click)="addItem()">Add</button>
-  <button (click)="removeItem(2)">Remove</button>  
+  <h3>Basket</h3>
+  <button (click)="getData()">Get data</button>
+  <table class="table table-striped table-hover">
+    <tr>
+      <th>Name</th>
+      <th>Cateogry</th>
+      <th>Unit prize</th>
+      <th>Amount</th>
+      <th>Prize</th>
+      <th></th>            
+    </tr>
+    <tr *ngFor="let product of basketContent$ | async;index as i">
+      <td>{{product.name}}</td>
+      <td>{{product.category}}</td>
+      <td>{{product.prize | number: '.2'}}zł</td>
+      <td>{{product.amount}}</td>
+      <td>{{product.prize*product.amount | number: '.2'}}zł</td>
+      <!--
+      <td><div *ngFor = "let pro of prizes$ | async;index as ind">
+          <p *ngIf="ind == i">{{pro | number: '.2'}}zł</p>
+      </div></td>
+    -->      
+      <td>
+          <i class="fas fa-trash-alt" id="removeIcon" (click)="removeItem(i)"></i>
+      </td>            
+    </tr>
+  </table>
+  <div class="noneMargin">
+      <p>Full prize: {{fullPrize$ | async | number: '.2'}}zł</p>
+  </div>  
+  <h6>Last added product: {{lastProductName$ | async}}</h6>
+  <br/>
+  <br/>
+  <br/>
+  <br/>
+  <br/>      
 </div>

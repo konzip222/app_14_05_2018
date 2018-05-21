@@ -58,16 +58,14 @@ export class ClockComponent implements OnInit {
   resultSum2 = 0;
 
   ngOnInit() {
-    this.addTooltipFuntions();
     this.changeArrayValue();
     this.checkInputs(this.dataInput.StartTime,this.dataInput.Issue.IssueName);    
     setInterval(() => {
       this.updateTime(this.dataInput.StartTime);
-    }, 1000);  
-  }
-
-  onResize(event) {
-    this.addTooltipFuntions();
+    }, 1000);
+    setInterval(() => {
+      this.addTooltipFuntions();
+    }, 2000);      
   }
 
   updateTime(initialDate){
@@ -172,7 +170,7 @@ export class ClockComponent implements OnInit {
     }
 
     let goodFn =  element => {let v = element * element; return v *2;}
-    x.forEach((kuubar, index) => console.log(kuubar));
+   // x.forEach((kuubar, index) => console.log(kuubar));
     let y = x.map( goodFn );
     let sum = x.reduce((prev, curr, currIndex) => currIndex < 2 ? prev + curr : prev, -1);
     x.filter(foo => foo > 2);
@@ -205,4 +203,5 @@ export class ClockComponent implements OnInit {
       }
     }
   }
+
 }

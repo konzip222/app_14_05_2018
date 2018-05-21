@@ -3,4 +3,5 @@ export class Product {
     category: string;
     prize: number;
     amount: number;    
+    discount: boolean;
 }

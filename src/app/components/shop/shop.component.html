@@ -1,22 +1,32 @@
 <div class="marginLeft">
-  shop works!
+  <h3>Available products</h3>
+  <h5>The most expensive product: {{mostExpensiveProductName$ | async}}</h5>
+  <h5>The least expensive product: {{leastExpensiveProductName$ | async}}</h5>
   <table class="table table-striped table-hover">
     <tr>
       <th>Name</th>
       <th>Cateogry</th>
-      <th>Prize</th>
+      <th>Unit prize</th>
       <th>Amount</th>
       <th></th>            
     </tr>
-    <tr *ngFor="let product of products;index as i">
+    <tr *ngFor="let product of avaibleProd$ | async;index as i">
       <td>{{product.name}}</td>
       <td>{{product.category}}</td>
-      <td>{{product.prize}}zł</td>
+      <td>{{product.prize | number: '.2'}}zł</td>
       <td><input type="number" [(ngModel)] = "product.amount"/></td>
       <td>
-          <button (click)="addItem(i)">Add</button>
-          <button (click)="removeItem(i)">Remove</button>
+          <button (click)="addItem(product)">Add</button>
       </td>            
     </tr>
-  </table>      
+  </table>
+  <h6>Products with discount:</h6>
+  <ul *ngFor="let product of discountProducts$ | async;index as i">
+    <li>{{product.name}}</li>
+  </ul>
+  <!-- class="noneMargin"
+  <div *ngFor="let basketProd  of avaibleProd | async">
+    <p>Name: {{basketProd.name}}</p>
+  </div>      -->
+<!--  <p>Test:{{someVar[0]}}</p> -->
 </div>

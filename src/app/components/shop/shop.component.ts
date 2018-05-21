@@ -1,72 +1,37 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy} from '@angular/core';
+import { Observable } from 'rxjs';
 import { ShopDataService } from '../../services/shop-data.service';
 import { Product } from '../../shared/product.model';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-shop',
   templateUrl: './shop.component.html',
   styleUrls: ['./shop.component.scss']
 })
-export class ShopComponent implements OnInit {
 
-  constructor(private _shopDataService: ShopDataService) { }
+export class ShopComponent implements OnInit{
 
-  goals : Product[];
-  goalText = "Some text";
-  itemCount = 0;
-  apple : Product = {
-    name: "apple",
-    category: "food",
-    prize: 2.05,
-    amount: 0,
-  };
-  banana : Product = {
-    name: "banana",
-    category: "food",
-    prize: 2.10,
-    amount: 0,
-  };
-  chicken : Product = {
-    name: "chicken",
-    category: "food",
-    prize: 10.99,
-    amount: 0,
-  };  
-  monitor : Product = {
-    name: "monitor",
-    category: "AGD",
-    prize: 310.99,
-    amount: 0,
-  };
-  keyboard : Product = {
-    name: "keyboard",
-    category: "AGD",
-    prize: 49.99,
-    amount: 0,
-  };  
-  mouse : Product = {
-    name: "mouse",
-    category: "AGD",
-    prize: 29.50,
-    amount: 0,
-  };   
+  public avaibleProd$ : Observable<Product[]>;
+  public discountProducts$: Observable<Product[]>;
+  public mostExpensiveProductName$: Observable<string>;
+  public leastExpensiveProductName$: Observable<string>;  
 
-  products = [this.apple,this.banana,this.chicken,this.monitor,this.mouse,this.keyboard];
+  constructor(private _shopDataService: ShopDataService) { 
+    this.avaibleProd$ = _shopDataService.avalibleProducts$.map( productList => productList);
+    this.discountProducts$ = _shopDataService.avalibleProducts$.map( productList => productList.filter(element => element.discount == true));
+    this.mostExpensiveProductName$ = _shopDataService.avalibleProducts$.map(productList => productList.reduce((prev , curr) => curr.prize >= prev.prize ? curr : prev).name);
+    this.leastExpensiveProductName$ = _shopDataService.avalibleProducts$.map(productList => productList.reduce((prev , curr) => curr.prize <= prev.prize ? curr : prev).name);    
+  }
 
   ngOnInit() {
-    this._shopDataService.goal.subscribe(res => this.goals = res);
+   setTimeout(() => {
+       this._shopDataService.update();
+    }, 0);
   }
 
-  addItem(index) {
-    this.goals.push(this.products[index]);
-    this.goalText += this.itemCount;
-    this._shopDataService.changeGoal(this.goals);
-    this.itemCount = this.goals.length;    
-  }
-
-  removeItem(i) {
-    this.goals.splice(i, 1);
-    this._shopDataService.changeGoal(this.goals);
+  addItem(product : Product) {
+    this._shopDataService.addProductToBasket(product);
   }
 
 }

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { ShopDataService } from '../../services/shop-data.service';
+import { Product } from '../../shared/product.model';
+import { element } from 'protractor';
 
 @Component({
   selector: 'app-basket',
@@ -8,25 +11,26 @@ import { ShopDataService } from '../../services/shop-data.service';
 })
 export class BasketComponent implements OnInit {
 
-  constructor(private _shopDataService: ShopDataService) { }
+  public basketContent$ : Observable<Product[]>;
+  public prizes$ : Observable<number[]>;
+  public fullPrize$: Observable<number>; 
+  public lastProductName$ : Observable<string>;   
 
-  basketContent = [];
-  goalText = "Some text";
-  itemCount = 0;
+  constructor(private _shopDataService: ShopDataService) {
+      this.basketContent$ = _shopDataService.basketProducts$.map( productList => productList);   
+      this.prizes$ = _shopDataService.basketProducts$.map(productList => productList.map(element => element.prize * element.amount));       
+      this.fullPrize$ = _shopDataService.basketProducts$.map(productList => productList.map(element => element.prize * element.amount).reduce((prev,curr) => prev+curr,0));    
+      this.lastProductName$ = _shopDataService.basketProducts$.map( productList => productList.reduce( (acc, curr) => curr ).name );      
+   }
 
   ngOnInit() {
-    this._shopDataService.goal.subscribe(res => this.basketContent = res);
   }
 
-  addItem() {
-    this.basketContent.push(this.goalText);
-    this.goalText += this.itemCount;
-    this._shopDataService.changeGoal(this.basketContent);
-    this.itemCount = this.basketContent.length;    
+  removeItem(index) {
+    this._shopDataService.removeProductFromBasket(index);
   }
 
-  removeItem(i) {
-    this.basketContent.splice(i, 1);
-    this._shopDataService.changeGoal(this.basketContent);
+  getData(){
+    this._shopDataService.updateBasket();
   }
 }
