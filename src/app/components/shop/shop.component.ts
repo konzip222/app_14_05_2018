@@ -18,10 +18,12 @@ export class ShopComponent implements OnInit{
   public leastExpensiveProductName$: Observable<string>;  
 
   constructor(private _shopDataService: ShopDataService) { 
+    let getMostExpensive =  (prev , curr) => curr.prize >= prev.prize ? curr : prev;
+    let getLeastExpensive = (prev , curr) => curr.prize <= prev.prize ? curr : prev;
     this.avaibleProd$ = _shopDataService.avalibleProducts$.map( productList => productList);
     this.discountProducts$ = _shopDataService.avalibleProducts$.map( productList => productList.filter(element => element.discount == true));
-    this.mostExpensiveProductName$ = _shopDataService.avalibleProducts$.map(productList => productList.reduce((prev , curr) => curr.prize >= prev.prize ? curr : prev).name);
-    this.leastExpensiveProductName$ = _shopDataService.avalibleProducts$.map(productList => productList.reduce((prev , curr) => curr.prize <= prev.prize ? curr : prev).name);    
+    this.mostExpensiveProductName$ = _shopDataService.avalibleProducts$.map(productList => productList.reduce(getMostExpensive).name);
+    this.leastExpensiveProductName$ = _shopDataService.avalibleProducts$.map(productList => productList.reduce(getLeastExpensive).name);    
   }
 
   ngOnInit() {
