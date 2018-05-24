@@ -6,6 +6,7 @@ import { AgmCoreModule } from '@agm/core';
 import { AngularFireModule} from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { ImageCropperModule } from 'ngx-image-cropper';
 import { DatabaseService } from './services/database.service';
 import { ShopDataService } from './services/shop-data.service';
 
@@ -23,6 +24,7 @@ import { ClockComponent } from './components/clock/clock.component';
 import { TestComponentComponent } from './components/test-component/test-component.component';
 import { ShopComponent } from './components/shop/shop.component';
 import { BasketComponent } from './components/basket/basket.component';
+import { ImgCropperComponent } from './components/img-cropper/img-cropper.component';
 
 @NgModule({
   declarations: [
@@ -34,14 +36,16 @@ import { BasketComponent } from './components/basket/basket.component';
     ClockComponent,
     TestComponentComponent,
     ShopComponent,
-    BasketComponent
+    BasketComponent,
+    ImgCropperComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule,    
+    AngularFireAuthModule,
+    ImageCropperModule,    
     RouterModule.forRoot([
       {
         path: '',
